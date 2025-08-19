@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/FirstMapScene.unity
+    guid: a5cced0be151a9f46b58f423a0467b3d
+  - enabled: 1
+    path: Assets/Scenes/SecondMapScene.unity
+    guid: 0adb783e0d4c4b74184f852e5bc948df
+  - enabled: 1
+    path: Assets/Scenes/ThirdMapScene.unity
+    guid: 677e4d8102d80a9409b52df6a08d63e3
   m_configObjects: {}
