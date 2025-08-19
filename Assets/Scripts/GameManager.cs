@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
         UpdateUI();  //UI 업데이트
     }
 
+    void SubmitItem()                //아이템 제출 기능 모두 제출시 포탈 생성
+    {
+
+    }
 
     void UpdateUI()
     {
@@ -53,6 +57,8 @@ public class GameManager : MonoBehaviour
        // for (int  i = 0;  i < itemData.Length;  i++)
        // {
            // ItemText.text = $"{itemData[i].itemName} : {}"
-       // }
+       // }               여기부터 수정 중. 
+       // 아이템이 갯수별로 오르게 설정, 특정 오브젝트 안에 인벤토리 추가, 인벤토리 안에 특정 아이템 넣을시 포탈 생성해야함.
+       //희연이가내일할게....
     }
 }
