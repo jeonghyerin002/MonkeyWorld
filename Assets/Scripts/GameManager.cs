@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [Header("아이템 정보")]
     public ItemSO[] itemData;             //public int itemCount = 0; 이전 코드 > 데이터를 사용했는데 매니저에 또 숫자로 적용할 필요 X
-    public int collectionItem = 0;     //수집해야하는 아이템 수
+    public int[] targetItemCounts;       //수집해야하는 아이템 수                   //public int targetItemCount = 0 < 이거도 숫자로 적용함.
+    private int screw;          //나사
+    private int spring;         //스프링
+    private int cogwheel;        //톱니바퀴
+
+    [Header("라운드")]
+    public int currentRound = 0;                //현재 라운드 번호
 
     [Header("UI")]
     public Text ItemText;        //아이템 개수 UI
@@ -18,6 +26,7 @@ public class GameManager : MonoBehaviour
 
 
     private int[] collectItems;         //총 수집한 아이템 수
+    
 
 
 
@@ -27,7 +36,19 @@ public class GameManager : MonoBehaviour
         // 아이템 개수 배열 초기화
         collectItems = new int[itemData.Length];
 
+        //포탑 비활성화
+        if (Portal != null) Portal.SetActive(false);
+
         UpdateUI();
+    }
+
+    int GetTargetCount(int itemIndex)                       //아이템별목표 수량 가져오기
+    {
+        if (currentRound < itemData[itemIndex].roundTargetCounts.Length)
+        {
+            return itemData[itemIndex].roundTargetCounts[currentRound];
+        }
+        return 0; 
     }
 
     // Update is called once per frame
@@ -36,29 +57,71 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void CollectItem(int itemIndex)
+    public void CollectItem(int itemIndex)
     {
         // 아이템 인덱스가 유효한지 확인   배웠던 코드
         if (itemIndex < 0 || itemIndex >= collectItems.Length) return;
 
-        collectionItem++;    //수집한 아이템 수 증가
+        collectItems[itemIndex]++;              //수집한 아이템 수 증가
+        //collectionItem++; 이전 코드 <단일로만 카운트 하고 있음 별도로 저장해야해서 Index넣어야 함.
 
         UpdateUI();  //UI 업데이트
     }
 
-    void SubmitItem()                //아이템 제출 기능 모두 제출시 포탈 생성
+    public void SubmitItem()                //아이템 제출 기능 모두 제출시 포탈 생성
     {
 
+        // 아이템이 목표 수량 이상인지 체크
+        for (int i = 0;  i < itemData.Length; i++)
+        {
+            if (collectItems[i] < GetTargetCount(i))
+            {
+                return;
+            }
+        }
+
+        //조건 충족시 포탈 활성화
+        for (int i = 0; i < itemData.Length; i++)
+        {
+            collectItems[i] -= GetTargetCount(i);
+        }
+
+        if (Portal != null) Portal.SetActive(true);
+
+        UpdateUI();
     }
 
     void UpdateUI()
     {
-        //ItemText.text = "";          // 아이템 개수 UI 초기화
-       // for (int  i = 0;  i < itemData.Length;  i++)
-       // {
-           // ItemText.text = $"{itemData[i].itemName} : {}"
-       // }               여기부터 수정 중. 
-       // 아이템이 갯수별로 오르게 설정, 특정 오브젝트 안에 인벤토리 추가, 인벤토리 안에 특정 아이템 넣을시 포탈 생성해야함.
-       //희연이가내일할게....
+       ItemText.text = "";          // 아이템 개수 UI 초기화
+       for (int  i = 0;  i < itemData.Length;  i++)
+       {
+            ItemText.text = $"나사     : {collectItems[i]} / {targetItemCounts[i]} \n" +
+                            $"스프링   : {collectItems[i]} / {targetItemCounts[i]} \n" +
+                            $"톱니바퀴 : {collectItems[i]} / {targetItemCounts[i]}\n";
+        }  //수정해야 함
+       
+    }
+
+    public void GoToNextround(string sceneName)
+    {
+        currentRound++;      //라운드 증가
+        ResetItems();        //아이템 초기화
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void ResetItems()               //다음 씬 이동후
+    {
+        // 수집 아이템 초기화
+        for (int i = 0; i < collectItems.Length; i++)
+        {
+            collectItems[i] = 0;
+        }
+
+        //포탈 비활성화
+        if (Portal != null) Portal.SetActive(false);
+
+        //UI 업데이트
+        UpdateUI();
     }
 }

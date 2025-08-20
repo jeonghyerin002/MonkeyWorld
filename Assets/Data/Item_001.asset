@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbf85996646620468aed53a0b0fc0e3, type: 3}
   m_Name: Item_001
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\uB098\uC0AC"
   itemIcon: {fileID: 0}
   type: 0
+  roundTargetCounts: 060000000600000005000000
