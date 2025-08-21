@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;  // 싱글톤
+
     [Header("아이템 정보")]
     public ItemSO[] itemData;             //public int itemCount = 0; 이전 코드 > 데이터를 사용했는데 매니저에 또 숫자로 적용할 필요 X
     public int[] targetItemCounts;       //수집해야하는 아이템 수                   //public int targetItemCount = 0 < 이거도 숫자로 적용함.
@@ -26,8 +28,14 @@ public class GameManager : MonoBehaviour
 
 
     private int[] collectItems;         //총 수집한 아이템 수
-    
 
+
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
 
     // Start is called before the first frame update
