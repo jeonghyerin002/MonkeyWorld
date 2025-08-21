@@ -12,6 +12,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float smoothSpeed = 10f;            // 부드러운 이동 속도
 
     [Header("마우스 감도")]
+    [Range(0f, 100f)]
     public float mouseSensitivity = 100f;
 
     [Header("각도 제한")]
