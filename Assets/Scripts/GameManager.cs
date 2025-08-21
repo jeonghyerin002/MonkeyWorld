@@ -93,14 +93,13 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-       ItemText.text = "";          // 아이템 개수 UI 초기화
-       for (int  i = 0;  i < itemData.Length;  i++)
-       {
-            ItemText.text = $"나사     : {collectItems[i]} / {targetItemCounts[i]} \n" +
-                            $"스프링   : {collectItems[i]} / {targetItemCounts[i]} \n" +
-                            $"톱니바퀴 : {collectItems[i]} / {targetItemCounts[i]}\n";
-        }  //수정해야 함
-       
+        ItemText.text = ""; // 초기화
+
+        for (int i = 0; i < itemData.Length; i++)
+        {
+            ItemText.text += $"{itemData[i].itemName} : {collectItems[i]} / {GetTargetCount(i)}\n";
+        }
+
     }
 
     public void GoToNextround(string sceneName)
