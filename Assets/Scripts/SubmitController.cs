@@ -17,29 +17,32 @@ public class SubmitController : MonoBehaviour
         if (submitButtonUI != null) submitButtonUI.SetActive(false);           //버튼 비활성화
     }
 
-    void OnTriggerEnter(Collider other)                  //플레이어가 제출 구역에 들어왔을 때 활성화
+    void OnTriggerEnter(Collider other)   // 플레이어가 제출 구역에 들어왔을 때
     {
         if (other.CompareTag("Player"))
         {
-            if (submitButtonUI != null) submitButtonUI.SetActive(true);
+            if (gameManager != null)
+            {
+                gameManager.SubmitItem();   // 자동 제출 (포탈 열림 여부는 GameManager가 판단)
+            }
         }
     }
 
-    void OnTriggerExit(Collider other)                       //플레이어가 제출 구역을 벗어났을 때 비활성화
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (submitButtonUI != null) submitButtonUI.SetActive(false);
-        }
-    }
+    //  void OnTriggerExit(Collider other)                       //플레이어가 제출 구역을 벗어났을 때 비활성화
+    //  {
+    //     if (other.CompareTag("Player"))
+    //    {
+    //        if (submitButtonUI != null) submitButtonUI.SetActive(false);
+    //   }
+    //  }
 
-    public void OnClickSumbit()
-    {
-        if (gameManager != null)
-        {
-            gameManager.SubmitItem();
-        }
-    }
+    //  public void OnClickSumbit()
+    //  {
+    //     if (gameManager != null)
+    //    {
+    //        gameManager.SubmitItem();
+    //    }
+    // }
 
     // Update is called once per frame
     void Update()
