@@ -2663,6 +2663,8 @@ MonoBehaviour:
   ItemText: {fileID: 126446586}
   Portal: {fileID: 1138756148}
   roundDialogues: []
+  dialogueManager: {fileID: 0}
+  round: 1
 --- !u!4 &1707238586
 Transform:
   m_ObjectHideFlags: 0

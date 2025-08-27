@@ -26,14 +26,13 @@ public class GameManager : MonoBehaviour
     [Header("포탈")]
     public GameObject Portal;         //다음 라운드로 넘어가는 포탈     아이템을 수집 후 특정 오브젝트에 제출하면 포탈이 활성화
 
-    [Header("라운드 별 대사 SO")]
-    public DialogueSO[] roundDialogues;         //대사 SO 배열
+  
 
    
 
     private int[] collectItems;         //총 수집한 아이템 수 
     
-    public DialogueManager dialogueManager;
+    
     public int round = 1;
 
 
@@ -64,21 +63,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    //public void StartRound()
-    //{
-    //    if (round < roundDialogues.Length)
-    //    {
-    //        dialogueManager.StartDialogue(roundDialogues[round]);
-    //    }
-
-    //    round++;
-    //}
-
-    //public void EndRound()
-    //{
-    //    round++;
-    //    StartRound(); // 다음 라운드 시작 시 다시 다이얼로그 실행
-    //}
+   
 
 
     public void NextRound()
