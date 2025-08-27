@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int cogwheel;        //톱니바퀴
 
     [Header("라운드")]
-    public int currentRound = 0;                //현재 라운드 번호
+    public int currentRound = 1;                //현재 라운드 번호
 
     [Header("UI")]
     public Text ItemText;        //아이템 개수 UI
@@ -29,9 +29,13 @@ public class GameManager : MonoBehaviour
     [Header("라운드 별 대사 SO")]
     public DialogueSO[] roundDialogues;         //대사 SO 배열
 
+   
 
-    private int[] collectItems;         //총 수집한 아이템 수
+    private int[] collectItems;         //총 수집한 아이템 수 
     
+    public DialogueManager dialogueManager;
+    public int round = 1;
+
 
 
     private void Awake()
@@ -46,31 +50,41 @@ public class GameManager : MonoBehaviour
     {
         //StartRound();
 
+       
+
         // 아이템 개수 배열 초기화
         collectItems = new int[itemData.Length];
 
         //포탑 비활성화
         if (Portal != null) Portal.SetActive(false);
 
+
+        round++;
+
         UpdateUI();
     }
 
-   // public void StartRound()
+    //public void StartRound()
     //{
-   //     if (currentRound < roundDialogues.Length)
+    //    if (round < roundDialogues.Length)
     //    {
-    //        DialogueManager.StartDialogue(roundDialogues[currentRound]);
+    //        dialogueManager.StartDialogue(roundDialogues[round]);
     //    }
-   // }
 
-   // public void OnDialogueEnd()
-   // {
+    //    round++;
+    //}
 
-   // }
+    //public void EndRound()
+    //{
+    //    round++;
+    //    StartRound(); // 다음 라운드 시작 시 다시 다이얼로그 실행
+    //}
+
 
     public void NextRound()
     {
         currentRound++;
+        
       
     }
 

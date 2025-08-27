@@ -7,6 +7,6 @@ using UnityEngine;
                     
 public class DialogueSO : ScriptableObject
 {
-    [TextArea]
-    public List<string> dialogues = new List<string>();
+    [TextArea(2, 5)]
+    public string[] sentences;
 }
