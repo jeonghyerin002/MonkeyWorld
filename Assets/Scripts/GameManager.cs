@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
@@ -8,29 +8,29 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;  // ½Ì±ÛÅæ
+    public static GameManager Instance;  // ì‹±ê¸€í†¤
 
-    [Header("¾ÆÀÌÅÛ Á¤º¸")]
-    public ItemSO[] itemData;             //public int itemCount = 0; ÀÌÀü ÄÚµå > µ¥ÀÌÅÍ¸¦ »ç¿ëÇß´Âµ¥ ¸Å´ÏÀú¿¡ ¶Ç ¼ıÀÚ·Î Àû¿ëÇÒ ÇÊ¿ä X
-    public int[] targetItemCounts;       //¼öÁıÇØ¾ßÇÏ´Â ¾ÆÀÌÅÛ ¼ö                   //public int targetItemCount = 0 < ÀÌ°Åµµ ¼ıÀÚ·Î Àû¿ëÇÔ.
-    private int screw;          //³ª»ç
-    private int spring;         //½ºÇÁ¸µ
-    private int cogwheel;        //Åé´Ï¹ÙÄû
+    [Header("ì•„ì´í…œ ì •ë³´")]
+    public ItemSO[] itemData;             //public int itemCount = 0; ì´ì „ ì½”ë“œ > ë°ì´í„°ë¥¼ ì‚¬ìš©í–ˆëŠ”ë° ë§¤ë‹ˆì €ì— ë˜ ìˆ«ìë¡œ ì ìš©í•  í•„ìš” X
+    public int[] targetItemCounts;       //ìˆ˜ì§‘í•´ì•¼í•˜ëŠ” ì•„ì´í…œ ìˆ˜                   //public int targetItemCount = 0 < ì´ê±°ë„ ìˆ«ìë¡œ ì ìš©í•¨.
+    private int screw;          //ë‚˜ì‚¬
+    private int spring;         //ìŠ¤í”„ë§
+    private int cogwheel;        //í†±ë‹ˆë°”í€´
 
-    [Header("¶ó¿îµå")]
-    public int currentRound = 1;                //ÇöÀç ¶ó¿îµå ¹øÈ£
+    [Header("ë¼ìš´ë“œ")]
+    public int currentRound = 1;                //í˜„ì¬ ë¼ìš´ë“œ ë²ˆí˜¸
 
     [Header("UI")]
-    public Text ItemText;        //¾ÆÀÌÅÛ °³¼ö UI
+    public Text ItemText;        //ì•„ì´í…œ ê°œìˆ˜ UI
 
-    [Header("Æ÷Å»")]
-    public GameObject Portal;         //´ÙÀ½ ¶ó¿îµå·Î ³Ñ¾î°¡´Â Æ÷Å»     ¾ÆÀÌÅÛÀ» ¼öÁı ÈÄ Æ¯Á¤ ¿ÀºêÁ§Æ®¿¡ Á¦ÃâÇÏ¸é Æ÷Å»ÀÌ È°¼ºÈ­
+    [Header("í¬íƒˆ")]
+    public GameObject Portal;         //ë‹¤ìŒ ë¼ìš´ë“œë¡œ ë„˜ì–´ê°€ëŠ” í¬íƒˆ     ì•„ì´í…œì„ ìˆ˜ì§‘ í›„ íŠ¹ì • ì˜¤ë¸Œì íŠ¸ì— ì œì¶œí•˜ë©´ í¬íƒˆì´ í™œì„±í™”
 
   
 
    
 
-    private int[] collectItems;         //ÃÑ ¼öÁıÇÑ ¾ÆÀÌÅÛ ¼ö 
+    private int[] collectItems;         //ì´ ìˆ˜ì§‘í•œ ì•„ì´í…œ ìˆ˜ 
     
     
     public int round = 1;
@@ -51,11 +51,12 @@ public class GameManager : MonoBehaviour
 
        
 
-        // ¾ÆÀÌÅÛ °³¼ö ¹è¿­ ÃÊ±âÈ­
+        // ì•„ì´í…œ ê°œìˆ˜ ë°°ì—´ ì´ˆê¸°í™”
         collectItems = new int[itemData.Length];
 
-        //Æ÷Å¾ ºñÈ°¼ºÈ­
-        if (Portal != null) Portal.SetActive(false);
+        
+        collectItems = new int[itemData.Length];
+        // í¬íƒˆì€ í•­ìƒ ì¼œë‘¬ë„ ë¨ â†’ ì´ë™ì€ ì¡°ê±´ ì²´í¬ë¡œë§Œ
 
 
         round++;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
       
     }
 
-    int GetTargetCount(int itemIndex)                       //¾ÆÀÌÅÛº°¸ñÇ¥ ¼ö·® °¡Á®¿À±â
+    int GetTargetCount(int itemIndex)                       //ì•„ì´í…œë³„ëª©í‘œ ìˆ˜ëŸ‰ ê°€ì ¸ì˜¤ê¸°
     {
         if (currentRound < itemData[itemIndex].roundTargetCounts.Length)
         {
@@ -90,41 +91,30 @@ public class GameManager : MonoBehaviour
 
     public void CollectItem(int itemIndex)
     {
-        // ¾ÆÀÌÅÛ ÀÎµ¦½º°¡ À¯È¿ÇÑÁö È®ÀÎ   ¹è¿ü´ø ÄÚµå
+        // ì•„ì´í…œ ì¸ë±ìŠ¤ê°€ ìœ íš¨í•œì§€ í™•ì¸   ë°°ì› ë˜ ì½”ë“œ
         if (itemIndex < 0 || itemIndex >= collectItems.Length) return;
 
-        collectItems[itemIndex]++;              //¼öÁıÇÑ ¾ÆÀÌÅÛ ¼ö Áõ°¡
-        //collectionItem++; ÀÌÀü ÄÚµå <´ÜÀÏ·Î¸¸ Ä«¿îÆ® ÇÏ°í ÀÖÀ½ º°µµ·Î ÀúÀåÇØ¾ßÇØ¼­ Index³Ö¾î¾ß ÇÔ.
+        collectItems[itemIndex]++;              //ìˆ˜ì§‘í•œ ì•„ì´í…œ ìˆ˜ ì¦ê°€
+        //collectionItem++; ì´ì „ ì½”ë“œ <ë‹¨ì¼ë¡œë§Œ ì¹´ìš´íŠ¸ í•˜ê³  ìˆìŒ ë³„ë„ë¡œ ì €ì¥í•´ì•¼í•´ì„œ Indexë„£ì–´ì•¼ í•¨.
 
-        UpdateUI();  //UI ¾÷µ¥ÀÌÆ®
+        UpdateUI();  //UI ì—…ë°ì´íŠ¸
     }
 
-    public void SubmitItem()                //¾ÆÀÌÅÛ Á¦Ãâ ±â´É ¸ğµÎ Á¦Ãâ½Ã Æ÷Å» »ı¼º
+    public bool CanGoNextRound()   // í¬íƒˆ í†µê³¼ ê°€ëŠ¥ ì—¬ë¶€ ì²´í¬
     {
-
-        // ¾ÆÀÌÅÛÀÌ ¸ñÇ¥ ¼ö·® ÀÌ»óÀÎÁö Ã¼Å©
-        for (int i = 0;  i < itemData.Length; i++)
+        for (int i = 0; i < itemData.Length; i++)
         {
             if (collectItems[i] < GetTargetCount(i))
             {
-                return;
+                return false; // ëª©í‘œ ë¯¸ë‹¬ â†’ ì´ë™ ë¶ˆê°€
             }
         }
-
-        //Á¶°Ç ÃæÁ·½Ã Æ÷Å» È°¼ºÈ­
-        for (int i = 0; i < itemData.Length; i++)
-        {
-            collectItems[i] -= GetTargetCount(i);
-        }
-
-        if (Portal != null) Portal.SetActive(true);
-
-        UpdateUI();
+        return true; // ëª¨ë“  ì•„ì´í…œ ëª©í‘œ ì¶©ì¡±
     }
 
     void UpdateUI()
     {
-        ItemText.text = ""; // ÃÊ±âÈ­
+        ItemText.text = ""; // ì´ˆê¸°í™”
 
         for (int i = 0; i < itemData.Length; i++)
         {
@@ -135,23 +125,23 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextround(string sceneName)
     {
-        currentRound++;      //¶ó¿îµå Áõ°¡
-        ResetItems();        //¾ÆÀÌÅÛ ÃÊ±âÈ­
-        SceneManager.LoadScene(sceneName);
+        currentRound++;      //ë¼ìš´ë“œ ì¦ê°€
+        ResetItems();        //ì•„ì´í…œ ì´ˆê¸°í™”
+       // SceneManager.LoadScene(sceneName);
     }
 
-    public void ResetItems()               //´ÙÀ½ ¾À ÀÌµ¿ÈÄ
+    public void ResetItems()               //ë‹¤ìŒ ì”¬ ì´ë™í›„
     {
-        // ¼öÁı ¾ÆÀÌÅÛ ÃÊ±âÈ­
+        // ìˆ˜ì§‘ ì•„ì´í…œ ì´ˆê¸°í™”
         for (int i = 0; i < collectItems.Length; i++)
         {
             collectItems[i] = 0;
         }
 
-        //Æ÷Å» ºñÈ°¼ºÈ­
+        //í¬íƒˆ ë¹„í™œì„±í™”
         if (Portal != null) Portal.SetActive(false);
 
-        //UI ¾÷µ¥ÀÌÆ®
+        //UI ì—…ë°ì´íŠ¸
         UpdateUI();
     }
 }

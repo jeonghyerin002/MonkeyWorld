@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    public string nextSceneName;  // 이동할
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,7 +22,12 @@ public class SceneLoadManager : MonoBehaviour
             {
                 Debug.Log("다음 씬이 없습니다.");
             }
+            GameManager.Instance.GoToNextround(nextSceneName);
         }
+        else
+        {
+            Debug.Log("아이템을 모두 모아야 이동할 수 있어!");
+        }
+    }
 
     }
-}
